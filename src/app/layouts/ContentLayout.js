@@ -4,38 +4,18 @@ import { Button } from "react-bootstrap";
 import AdminLayout from "./AdminLayout";
 import LinkActionComponent from "@/app/components/LinkActionComponent";
 
-export default function ContentLayout({ children, breadcrumbTitle, breadcrumbItems, contentTitle, contentAction = {},extraHeader }) {
+export default function ContentLayout({ children, info, contentTitle }) {
   return (
     <AdminLayout 
-      breadcrumbTitle={breadcrumbTitle || "Dashboard"} 
-      breadcrumbItems={breadcrumbItems || [
-        { label: "Home", href: "/" },
-        { label: breadcrumbTitle || "Dashboard", active: true },
-      ]}
+      infoTitle={info?.title || "Dashboard"} infoDesc={info?.desc || "Manage Dashboard"} infoContent= {info?.content || ""}
     >
-      <div className="card card-danger card-outline mb-4">
+      <div className="card ">
         {/* Header */}
         <div className="card-header">
-          <div className="card-title">{contentTitle || breadcrumbTitle}</div>
-            <div className="card-tools">
-                {contentAction?.create && (
-                  <LinkActionComponent href={contentAction.url} action="create">
-                    Tambah
-                  </LinkActionComponent>
-                )}
-                {contentAction?.custom?.map((btn, index) => (
-                  <LinkActionComponent
-                    key={index}
-                    href={btn.url || "#"}
-                    action={btn.action}
-                    variant={btn.variant}
-                    onClick={btn.onClick}
-                  >
-                    {btn.label}
-                  </LinkActionComponent>
-                ))}
+          <div className="card-title">{contentTitle || "Data"}</div>
+            {/* <div className="card-tools">
                 {extraHeader && extraHeader}
-            </div>
+            </div> */}
         </div>
 
         {/* Body */}

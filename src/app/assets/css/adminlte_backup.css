@@ -107,7 +107,6 @@
   --bs-border-color: #dee2e6;
   --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
   --bs-border-radius: 0.375rem;
-  --bs-border-radius-custom: .625rem;
   --bs-border-radius-sm: 0.25rem;
   --bs-border-radius-lg: 0.5rem;
   --bs-border-radius-xl: 1rem;
@@ -126,7 +125,7 @@
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
 }
- 
+
 [data-bs-theme=dark] {
   color-scheme: dark;
   --bs-body-color: #dee2e6;
@@ -139,7 +138,6 @@
   --bs-secondary-color-rgb: 222, 226, 230;
   --bs-secondary-bg: #343a40;
   --bs-secondary-bg-rgb: 52, 58, 64;
-  --bs-polos-bg-custom:#fff;
   --bs-mamat-color: rgba(207, 85, 4, 0.75);
   --bs-mamat-bg-rgb: 251, 251, 251;
   --bs-tertiary-color: rgba(222, 226, 230, 0.5);
@@ -4366,14 +4364,14 @@ textarea.form-control-lg {
   --bs-card-title-spacer-y: 0.5rem;
   --bs-card-title-color: ;
   --bs-card-subtitle-color: ;
-  /* --bs-card-border-width: var(--bs-border-width); */
+  --bs-card-border-width: var(--bs-border-width);
   --bs-card-border-color: var(--bs-border-color-translucent);
-  --bs-card-border-radius: var(--bs-border-radius-custom);
+  --bs-card-border-radius: var(--bs-border-radius);
   --bs-card-box-shadow: ;
   --bs-card-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity));
+  --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
   --bs-card-cap-color: ;
   --bs-card-height: ;
   --bs-card-color: ;
@@ -7339,7 +7337,7 @@ textarea.form-control-lg {
 }
 
 .shadow {
-  box-shadow: var(--bs-box-shadow-sm) !important;
+  box-shadow: var(--bs-box-shadow) !important;
 }
 
 .shadow-sm {
@@ -8975,11 +8973,14 @@ textarea.form-control-lg {
   --bs-bg-opacity: 1;
   background-color: transparent !important;
 }
+
 .bg-body-secondary {
   --bs-bg-opacity: 1;
-  /* background-color: rgba(var(--bs-secondary-bg-rgb), var(--bs-bg-opacity)) !important; */
-  background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
-  
+  background-color: rgba(var(--bs-secondary-bg-rgb), var(--bs-bg-opacity)) !important;
+}
+.bg-body-mamat {
+  --bs-bg-opacity: 2;
+  background-color: rgba(var(--bs-mamat-bg-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-body-tertiary {
@@ -12899,9 +12900,8 @@ textarea.form-control-lg {
   --lte-sidebar-color: #343a40;
   --lte-sidebar-hover-color: #212529;
   --lte-sidebar-active-color: #000;
-  --lte-sidebar-menu-radius: .625rem;
-  --lte-sidebar-menu-active-bg: #2f80ed;
-  --lte-sidebar-menu-active-color: #fff;
+  --lte-sidebar-menu-active-bg: rgba(0, 0, 0, 0.1);
+  --lte-sidebar-menu-active-color: #000;
   --lte-sidebar-submenu-bg: transparent;
   --lte-sidebar-submenu-color: #777;
   --lte-sidebar-submenu-hover-color: #000;
@@ -13005,7 +13005,6 @@ textarea.form-control-lg {
 .sidebar-wrapper .nav-link {
   display: flex;
   justify-content: flex-start;
-  padding: 12px;
 }
 .sidebar-wrapper .nav-link p {
   overflow: hidden;
@@ -13020,9 +13019,7 @@ textarea.form-control-lg {
   max-width: 1.5rem;
 }
 .sidebar-wrapper .sidebar-menu > .nav-item.menu-open .nav-link.active:not(:hover) {
-  /* --lte-sidebar-menu-active-bg: transparent; */
-  --lte-sidebar-menu-active-bg: unset;
-  /* padding: 12px; */
+  --lte-sidebar-menu-active-bg: transparent;
 }
 .sidebar-wrapper .sidebar-menu > .nav-item > .nav-link:active, .sidebar-wrapper .sidebar-menu > .nav-item > .nav-link:focus {
   color: var(--lte-sidebar-color);
@@ -13030,7 +13027,6 @@ textarea.form-control-lg {
 .sidebar-wrapper .sidebar-menu > .nav-item > .nav-link.active:not(:hover) {
   color: var(--lte-sidebar-menu-active-color);
   background-color: var(--lte-sidebar-menu-active-bg);
-  box-shadow: var(--bs-box-shadow-sm);
 }
 .sidebar-wrapper .sidebar-menu > .nav-item.menu-open > .nav-link, .sidebar-wrapper .sidebar-menu > .nav-item:hover > .nav-link,
 .sidebar-wrapper .sidebar-menu > .nav-item > .nav-link:focus {
@@ -13093,9 +13089,7 @@ textarea.form-control-lg {
   position: relative;
   width: 100%;
   transition: width ease-in-out 0.3s;
-  
-  /* border-radius: 0.375rem; */
-  border-radius: var(--lte-sidebar-menu-radius);
+  border-radius: 0.375rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .sidebar-menu .nav-link {
@@ -14371,7 +14365,7 @@ html.maximized-card {
   position: relative;
   padding: 1rem 1rem;
   background-color: transparent;
-  /* border-bottom: 1px solid var(--bs-border-color-translucent); */
+  border-bottom: 1px solid var(--bs-border-color-translucent);
   border-top-left-radius: 0.375rem;
   border-top-right-radius: 0.375rem;
 }

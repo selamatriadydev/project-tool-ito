@@ -24,7 +24,7 @@ export default function ButtonActionComponent({
     case 'detail': variant = 'info'; break;
     case 'update': variant = 'warning'; break;
     case 'delete': variant = 'danger'; break;
-    case 'create': variant = 'success'; break;
+    case 'create': variant = 'primary'; break;
     case 'save': variant = 'primary'; break;
     case 'back-primary': variant = 'primary'; break;
     case 'back':
@@ -68,7 +68,7 @@ export default function ButtonActionComponent({
           className={className}
           onClick={() => setShowModal(true)}
         >
-          {children}
+          <i className="bi bi-trash"></i> {children}
         </Button>
 
         <Modal show={showModal} onHide={() => setShowModal(false)} centered>
@@ -100,12 +100,12 @@ export default function ButtonActionComponent({
     return (
       <>
         <Button
-          size="sm"
+          size="md"
           variant={variant}
-          className={className}
+          className="me-1 align-items-center justify-content-center"
           onClick={() => setShowModal(true)}
         >
-          {children}
+          <i className="bi bi-plus fw-bold me-1"></i> Add {children}
         </Button>
 
         <ModalComponent show={showModal} onClose={() => setShowModal(false)} />

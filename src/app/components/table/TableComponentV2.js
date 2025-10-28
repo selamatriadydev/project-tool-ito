@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Table, Button, Modal,Pagination } from "react-bootstrap";
+import ButtonTableComponent from "../ButtonTableComponent";
 
 export default function TableComponentV2({ header, data, modalComponents = {} }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,26 +69,7 @@ export default function TableComponentV2({ header, data, modalComponents = {} })
                 <td>
                   {modalComponents &&
                     Object.entries(modalComponents).map(([type, Component]) => {
-                      let variant = "secondary";
-                      switch (type) {
-                        case "detail": variant = "info"; break;
-                        case "edit": variant = "warning"; break;
-                        case "delete": variant = "danger"; break;
-                        case "add": variant = "success"; break;
-                        default: variant = "secondary";
-                      }
-
-                      return (
-                        <Button
-                          key={type}
-                          size="sm"
-                          variant={variant}
-                          className="me-1"
-                          onClick={() => openModal(type, row)}
-                        >
-                          {type.charAt(0).toUpperCase() + type.slice(1)}
-                        </Button>
-                      );
+                      return <ButtonTableComponent key={type} action={type} onClick={() => openModal(type, row)} />
                     })}
                 </td>
 

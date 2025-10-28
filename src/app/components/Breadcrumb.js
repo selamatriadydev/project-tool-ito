@@ -7,7 +7,7 @@ export default function Breadcrumb({ title, items = [] }) {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-6">
-            <h3 className="mb-0">{title}</h3>
+            <h2 className="mb-0">{title}</h2>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-end">

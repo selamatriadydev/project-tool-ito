@@ -72,7 +72,7 @@ export default function TopBar() {
           {/* Navbar Search */}
 
           {/* Messages Dropdown */}
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className={`nav-link ${showMessages ? 'show' : ''}`} href="#" onClick={() => setShowMessages(!showMessages)}>
               <i className="bi bi-chat-text"></i>
               <span className="navbar-badge badge text-bg-danger">3</span>
@@ -86,7 +86,7 @@ export default function TopBar() {
                 <Link href="#" className="dropdown-item dropdown-footer">See All Messages</Link>
               </div>
             )}
-          </li>
+          </li> */}
 
           {/* Notifications Dropdown */}
           <li className="nav-item dropdown">

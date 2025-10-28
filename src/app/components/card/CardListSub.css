@@ -1,0 +1,9 @@
+.resource-card,
+.sub-card {
+  transition: all 0.2s ease;
+}
+.resource-card:hover,
+.sub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
