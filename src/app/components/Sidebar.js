@@ -44,7 +44,7 @@ function SidebarItem({ title, icon, href, children, badge, isActive }) {
 }
 
 // Sidebar Component
-export default function Sidebar() {
+export default function Sidebar({sidebarRef}) {
   const menuItems = [
     {
       title: "Dashboard",
@@ -84,19 +84,27 @@ export default function Sidebar() {
       ],
     },
     {
+      title: "Dokuments",
+      icon: "bi bi-clipboard-fill",
+      badge: 1,
+      children: [
+        { title: "Notulen", href: "/monitoring/masterr", icon: "bi bi-circle" },
+      ],
+    },
+    {
       title: "App",
       icon: "bi bi-clipboard-fill",
       badge: 2,
       children: [
-        { title: "Users", href: "/app/users", icon: "bi bi-circle" },
-        { title: "Aplikasi", href: "/app/aplikasi", icon: "bi bi-circle" },
+        { title: "Groups", href: "/aplikasi/groups", icon: "bi bi-circle" },
+        { title: "Users", href: "/aplikasi/users", icon: "bi bi-circle" },
       ],
     },
     // bisa lanjutkan semua menu lain...
   ];
 
   return (
-    <aside className="app-sidebar bg-body-secondary shadow" data-bs-theme="light">
+    <aside ref={sidebarRef} className="app-sidebar bg-body-secondary shadow" data-bs-theme="light">
       {/* Sidebar Brand */}
       <div className="sidebar-brand">
         <Link href="/" className="brand-link">

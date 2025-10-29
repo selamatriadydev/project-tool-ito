@@ -81,33 +81,25 @@ export default function CardListSubComponent({items, modalComponents = {}}) {
 
   return (
     <div className="container my-4">
-      {currentItems.map((item) => (
-        <div key={item.id} className="mb-3">
-          {/* CARD UTAMA */} 
-          <Card
-            className="border-0 shadow-sm resource-card p-3 rounded-4"
-            
-          >
+      {currentItems.map((item, index) => (
+        <div key={`${item.id}-${index}`} className="mb-3">
+          <Card className="border-0 shadow-sm resource-card p-3 rounded-4">
             <div className="d-flex align-items-center justify-content-between">
               {/* Kiri */}
               <div className="d-flex align-items-center">
                 {item?.subItems?.length > 0 && (
                   <i
                     onClick={(e) => {
-                      e.stopPropagation(); // ⛔ mencegah klik ini memicu toggle parent
-                      toggleSubList(item.id);
+                      e.stopPropagation();
+                      toggleSubList(`${item.id}-${index}`);
                     }}
                     style={{ cursor: "pointer" }}
                     className={`me-2 bi ms-2 ${
-                      openId === item.id ? "bi-chevron-up" : "bi-chevron-down"
+                      openId === `${item.id}-${index}` ? "bi-chevron-up" : "bi-chevron-down"
                     }`}
                   ></i>
                 )}
-
-                <i
-                  className="bi bi-folder-fill fs-3 text-primary me-3"
-                  style={{ flexShrink: 0 }}
-                ></i>
+                <i className="bi bi-folder-fill fs-3 text-primary me-3"></i>
                 <div>
                   <h6 className="mb-1 fw-semibold">{item.title}</h6>
                   <small className="text-muted">{item.subject}</small>
@@ -130,61 +122,62 @@ export default function CardListSubComponent({items, modalComponents = {}}) {
                 <small className="text-muted me-3">{item.date}</small>
                 <span>
                   {modalComponents &&
-                  Object.entries(modalComponents).map(([type, Component]) => {
-                    return <ButtonTableComponent key={type} action={type} onClick={() => openModal(type, item)} />
-                  })}
+                    Object.entries(modalComponents).map(([type, Component]) => (
+                      <ButtonTableComponent
+                        key={`${type}-${item.id}-${index}`}
+                        action={type}
+                        onClick={() => openModal(type, item)}
+                      />
+                    ))}
                 </span>
-                {/* <i className="bi bi-pencil-square text-secondary me-3" role="button"></i>
-                <i className="bi bi-trash3 text-danger" role="button"></i> */}
               </div>
             </div>
           </Card>
+
           {/* SUB CARD (COLLAPSE) */}
           {item?.subItems?.length > 0 && (
-          <Collapse in={openId === item.id}>
-            <div className="mt-2 ps-5">
-              {item.subItems.map((sub, idx) => (
-                <Card
-                  key={idx}
-                  className="border-0 shadow-sm sub-card p-3 rounded-4 mb-2"
-                >
-                  <div className="d-flex align-items-center justify-content-between">
-                    {/* Kiri */}
-                    <div className="d-flex align-items-center">
-                      <i
-                        className="bi bi-file-earmark-text fs-4 text-secondary me-3"
-                        style={{ flexShrink: 0 }}
-                      ></i>
-                      <div>
-                        <h6 className="mb-1 fw-normal">{sub.title}</h6>
-                        <small className="text-muted">{sub.subject}</small>
+            <Collapse in={openId === `${item.id}-${index}`}>
+              <div className="mt-2 ps-5">
+                {item.subItems.map((sub, idx) => (
+                  <Card
+                    key={`sub-${item.id}-${sub.id ?? idx}`}
+                    className="border-0 shadow-sm sub-card p-3 rounded-4 mb-2"
+                  >
+                    <div className="d-flex align-items-center justify-content-between">
+                      {/* Kiri */}
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-file-earmark-text fs-4 text-secondary me-3"></i>
+                        <div>
+                          <h6 className="mb-1 fw-normal">{sub.title}</h6>
+                          <small className="text-muted">{sub.subject}</small>
+                        </div>
+                      </div>
+
+                      {/* Kanan */}
+                      <div className="d-flex align-items-center">
+                        <Badge
+                          pill
+                          className="text-capitalize me-3"
+                          style={{
+                            backgroundColor: getBadgeColor(sub.type),
+                            color: "#fff",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {sub.type}
+                        </Badge>
+                        <small className="text-muted me-3">{sub.date}</small>
+                        <i className="bi bi-info-square text-secondary me-3" role="button"></i>
                       </div>
                     </div>
-
-                    {/* Kanan */}
-                    <div className="d-flex align-items-center">
-                      <Badge
-                        pill
-                        className="text-capitalize me-3"
-                        style={{
-                          backgroundColor: getBadgeColor(sub.type),
-                          color: "#fff",
-                          fontWeight: "500",
-                        }}
-                      >
-                        {sub.type}
-                      </Badge>
-                      <small className="text-muted me-3">{sub.date}</small>
-                      <i className="bi bi-info-square text-secondary me-3" role="button"></i>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </Collapse>
+                  </Card>
+                ))}
+              </div>
+            </Collapse>
           )}
         </div>
       ))}
+
 
 
       {ActiveModalComponent && (

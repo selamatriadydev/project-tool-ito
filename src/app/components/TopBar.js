@@ -22,20 +22,6 @@ export default function TopBar() {
       setIsFullscreen(false);
     }
   };
-  const toggleSidebar = () => {
-    const body = document.body;
-
-    // Toggle collapsed
-    const isCollapsed = body.classList.toggle('sidebar-collapsed');
-
-    if (!isCollapsed) {
-      // Jika sidebar tidak collapsed (diblokir / dibuka), pastikan ada class 'sidebar-open'
-      body.classList.add('sidebar-open');
-    } else {
-      // Jika collapsed, hapus class 'sidebar-open'
-      body.classList.remove('sidebar-open');
-    }
-  };
 
   const messages = [
     { img: "/assets/img/user1-128x128.jpg", name: "Brad Diesel", time: "4 Hours Ago", text: "Call me whenever you can...", iconClass: "bi-star-fill text-danger" },
@@ -55,7 +41,7 @@ export default function TopBar() {
         {/* Start Navbar Links */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="#" role="button" onClick={toggleSidebar}>
+            <a className="nav-link" href="#" role="button" data-lte-toggle="sidebar">
               <i className="bi bi-list"></i>
             </a>
           </li>

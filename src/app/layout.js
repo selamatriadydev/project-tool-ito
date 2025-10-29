@@ -1,10 +1,11 @@
 // app/layout.js
 // import "./globals.css";
 import Head from "next/head";
-import Script from "next/script";
+// import Script from "next/script";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import '@/app/assets/css/adminlte.css';
+
 
 export default function RootLayout({ children }) {
   return (
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
       </Head>
       <body>
         {children}
-        <Script src="/adminlte/js/adminlte.min.js" strategy="afterInteractive" />
+        {/* <Script src="/adminlte/js/adminlte.min.js" strategy="afterInteractive" /> */}
       </body>
     </html>
   );
